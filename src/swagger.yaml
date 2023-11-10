@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  description: Optional multiline or single-line description in HTML.
+  version: 0.1.9
+servers:
+  - url: http://localhost:5000
+    description: Brew apps
+paths:
+  /books:
+    post:
+      summary: Create book
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Book"
+      responses:
+        "200":
+          description: "ok"
+      tags:
+        - book
+    get:
+      summary: List books
+      responses:
+        "200":
+          description: "ok"
+      tags:
+        - book
+  /books/{bookId}:
+    get:
+      summary: get book details
+      parameters:
+        - in: path
+          name: bookId
+          schema:
+            type: string
+          required: true
+          description: ID of the book
+      responses:
+        "200":
+          description: "ok"
+      tags:
+        - book
+    put:
+      summary: update book details
+      parameters:
+        - in: path
+          name: bookId
+          schema:
+            type: string
+          required: true
+          description: ID of the book
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Book"
+      responses:
+        "200":
+          description: "ok"
+      tags:
+        - book
+    delete:
+      summary: delete book details
+      parameters:
+        - in: path
+          name: bookId
+          schema:
+            type: string
+          required: true
+          description: ID of the book
+      responses:
+        "200":
+          description: "ok"
+      tags:
+        - book
+
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        title:
+          type: string
+          default: "Tintin"
+        author:
+          type: string
+          default: "John M J"
+        summary:
+          type: string
+          default: "Lorem ipsum"

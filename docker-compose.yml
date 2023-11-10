@@ -1,0 +1,48 @@
+version: "3"
+services:
+  node:
+    build:
+      context: ./docker/node
+      dockerfile: Dockerfile
+    image: taskphin/node
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/home
+    networks:
+      - taskphin
+    command: ["npm", "run", "dev"]
+
+  postgres:
+    image: "postgres:14.5"
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: taskphin
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - taskphin
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - taskphin
+
+networks:
+  taskphin:
+    driver: "bridge"
+
+volumes:
+  mongodb:
+    driver: "local"
