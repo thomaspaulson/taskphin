@@ -20,7 +20,7 @@ docker compose run --rm \
 
 `docker compose down`
 
-## Install dependency
+## Install additional dependency
 
     docker compose run --rm \
         -w /home \
@@ -50,10 +50,6 @@ docker compose run --rm \
 ### change file ownershp
 
 sudo chown -R $USER: .
-
-## swagger doc
-
-[http://localhost:5000/swagger](http://localhost:5000/swagger)
 
 ## reference on docker
 
